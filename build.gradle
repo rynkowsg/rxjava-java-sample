@@ -1,12 +1,25 @@
+apply plugin: 'application'
+apply plugin: 'idea'
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+mainClassName = "rxjava.demo.Main"
 
 repositories {
   mavenCentral()
 }
 
+configurations {
+  provided
+}
+
+sourceSets.main.compileClasspath += [configurations.provided]
+idea.module.scopes.PROVIDED.plus += [configurations.provided]
+
 dependencies {
+  compile 'io.reactivex:rxjava:1.0.14'
+  compile 'org.slf4j:slf4j-api:1.7.12'
+  compile 'org.slf4j:slf4j-simple:1.7.12'
+  provided 'org.projectlombok:lombok:1.16.6'
 }
 
 task wrapper(type: Wrapper) {
